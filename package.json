@@ -1,0 +1,11 @@
+{
+  "name": "rhythm-starter",
+  "private": true,
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"pnpm --filter server dev\" \"pnpm --filter client dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
