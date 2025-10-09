@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rhythm Starter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #0f172a;
+        color: #f8fafc;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 24px;
+      }
+      main {
+        max-width: 560px;
+      }
+      a {
+        color: #38bdf8;
+      }
+      code {
+        background: rgba(15, 23, 42, 0.6);
+        padding: 0 4px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Run the Rhythm Starter locally</h1>
+      <p>
+        You're seeing the GitHub Pages placeholder for <strong>NotTapTap</strong>. The playable rhythm prototype needs a live
+        backend for Spotify and Apple Music authentication, which GitHub Pages cannot host.
+      </p>
+      <p>
+        To experience the app, clone the repository and follow the setup steps in the <a href="../README.md">README</a>:
+      </p>
+      <pre><code>pnpm install
+pnpm dev</code></pre>
+      <p>
+        If you want a static Pages build, deploy the Express server elsewhere, run
+        <code>GITHUB_PAGES=1 pnpm --filter client build</code>, and publish the generated files from <code>client/dist</code>
+        into this <code>docs/</code> folder.
+      </p>
+    </main>
+  </body>
+</html>
