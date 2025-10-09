@@ -3,6 +3,7 @@ import ChartRenderer from './game/ChartRenderer'
 import { makeDummyChart } from './game/dummyChart'
 import { createSpotifyPlayer, getSpotifyAccessToken } from './sdk/spotify'
 import { initMusicKit } from './sdk/apple'
+import { API_BASE, apiUrl } from './config'
 
 type Service = 'spotify' | 'apple'
 
@@ -24,7 +25,7 @@ export default function App() {
 
   // ====== AUTH BUTTON HANDLERS ======
   const connectSpotify = () => {
-    window.location.href = '/api/spotify/login'
+    window.location.href = apiUrl('/api/spotify/login')
   }
   const connectApple = async () => {
     try {
@@ -146,6 +147,11 @@ export default function App() {
       <p>
         Connect a service, search & pick up to 10 songs, then play one and watch the dummy chart sync to the SDK clock.
       </p>
+      {API_BASE && (
+        <p style={{ background: '#fff4ce', color: '#5f370e', padding: '8px 12px', borderRadius: 6 }}>
+          Backend origin: <code>{API_BASE}</code>
+        </p>
+      )}
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
         <button onClick={connectSpotify} disabled={spotifyReady}>
