@@ -34,16 +34,21 @@
     <main>
       <h1>Run the Rhythm Starter locally</h1>
       <p>
-        This repository uses a Vite + React client and a Node/Express backend that require Spotify and Apple Music credentials.
-        The interactive app is not bundled into GitHub Pages because the backend cannot run here.
+        This repository ships two ways to experience the prototype:
       </p>
+      <ol style="text-align: left">
+        <li>
+          <strong>Local dev servers</strong> — clone the repo, configure <code>server/.env</code>, and run the steps below to get
+          the full Vite + Express experience.
+        </li>
+        <li>
+          <strong>GitHub Pages build</strong> — visit
+          <a href="https://patresia-a.github.io/NotTapTap/">https://patresia-a.github.io/NotTapTap/</a>. Configure the backend
+          origin in <code>docs/index.html</code> if you deploy the Node server elsewhere.
+        </li>
+      </ol>
       <p>
-        Want to host the UI on Pages anyway? Build the client with <code>GITHUB_PAGES=1 pnpm build</code> inside the
-        <code>client/</code> folder, publish the contents of <code>client/dist</code>, and point it at a separately hosted copy of
-        the backend.
-      </p>
-      <p>
-        For local development, clone the repository and follow the setup steps in the <a href="README.md">README</a>:
+        For local development, follow the setup steps in the <a href="README.md">README</a>:
       </p>
       <pre><code>pnpm install
 pnpm dev</code></pre>
