@@ -43,6 +43,7 @@ A tiny full-stack prototype that lets players connect their Spotify (Premium) or
    ```bash
    cp server/.env.example server/.env
    # Edit server/.env and provide Spotify + Apple Music credentials
+   cp client/.env.example client/.env # optional: only needed if pointing at a remote backend
    ```
 
 3. **Run the development servers**
@@ -53,7 +54,38 @@ A tiny full-stack prototype that lets players connect their Spotify (Premium) or
    This runs both the Express backend (port 5174) and the Vite dev server (port 5173). The client proxies `/api/*` requests to the backend.
 
 4. **Open the client**
-   Visit the URL printed by Vite (typically http://localhost:5173) and connect to your preferred service.
+Visit the URL printed by Vite (typically http://localhost:5173) and connect to your preferred service.
+
+> **Heads up:** GitHub Pages no longer hosts a playable build for this project. The static root `index.html` simply points you
+> back to these setup instructions. Use the local development workflow above to run the app.
+
+## Can this run on GitHub Pages?
+
+Yes — the repository now ships with an unbundled React build inside `docs/` so GitHub Pages can serve the playable UI. Because
+Pages is static-only you still need to deploy the Express backend elsewhere, but once that is online you can point the hosted
+client at it with a single config change.
+
+1. **Deploy the backend.** Host `server/index.js` on a Node-friendly platform (Render, Railway, Fly.io, etc.). Set
+   `CLIENT_ORIGIN` in the server `.env` to your Pages URL (for example `https://<user>.github.io/NotTapTap`).
+2. **Allow credentials in CORS.** The Express app already sends `credentials: true` so make sure your platform honours cookies
+   and HTTPS. Spotify OAuth requires them.
+3. **Update the Pages config.** Open `docs/index.html` and set `window.APP_CONFIG.apiBase` to your deployed backend origin
+   (without a trailing slash). Commit and push the change.
+
+With those steps complete, `https://<user>.github.io/NotTapTap/` will load the same rhythm UI as the local Vite build. The
+standalone Pages bundle loads React, Spotify, and Apple Music SDKs straight from CDN to keep the deployment lightweight.
+
+### Tweaking the static client
+
+- Edit `docs/index.html` to change the `apiBase` string (no trailing slash). The default empty string keeps calls relative to the
+  Pages origin so you can use a reverse proxy if desired.
+- Optional: drop overrides into `docs/app/config.runtime.js` if you prefer to keep secrets out of Git history. For example:
+  ```js
+  window.APP_CONFIG = window.APP_CONFIG || {}
+  window.APP_CONFIG.apiBase = 'https://your-backend.example'
+  ```
+- The unbundled build uses [`esm.sh`](https://esm.sh/) to load React/ReactDOM. If you need to pin versions, update the URLs in
+  `docs/app/*.js` accordingly.
 
 ## Notes
 
