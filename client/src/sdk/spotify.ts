@@ -1,3 +1,5 @@
+import { apiUrl } from '../config'
+
 let sdkReadyResolve: () => void
 export const spotifySDKReady = new Promise<void>(res => (sdkReadyResolve = res))
 
@@ -7,7 +9,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 }
 
 export async function getSpotifyAccessToken(): Promise<string> {
-  const r = await fetch('/api/spotify/access_token')
+  const r = await fetch(apiUrl('/api/spotify/access_token'), { credentials: 'include' })
   if (!r.ok) throw new Error('Not authenticated with Spotify')
   const j = await r.json()
   return j.access_token
